@@ -1,5 +1,14 @@
-#index-page .container {
-	margin-top: 50px;
+body {
+	background-color: 	#F8F8F8;
+}
+#index-page {
+	margin-top: 5em;
+}
+.center {
+	text-align: center;
+}
+#photo-row {
+	margin-top: 2em;
 }
 
 .row {
@@ -16,16 +25,14 @@
   margin-top: 8px;
   vertical-align: middle;
   padding: 0 1px;
-  border-style: solid;
-  border-color: black;
-  border-width: thin;
   padding:5px;
 }
 
 img {
 	max-width: 200px;
 	max-height: 200px;
-	filter:none;
+	min-width: 200px;
+	min-height: 200px;
 }
 
 .overlay-red {
@@ -34,4 +41,10 @@ img {
 
 .overlay-green {
    filter:drop-shadow(8px 8px 10px green);
+}
+
+@media only screen and (max-width: 800px) {
+    body {
+        background-color: lightblue;
+    }
 }

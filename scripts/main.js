@@ -3,7 +3,7 @@ let allPersons = [];
 let total_clicks = 0;
 let correct_clicks = 0;
 
-const MAX_PERSONS_DISPLAY = 4;
+const MAX_PERSONS_DISPLAY = 5;
 
 $.ajax({
     url: 'https://willowtreeapps.com/api/v1.0/profiles/',
