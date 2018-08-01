@@ -1,5 +1,8 @@
+// globals
 let allPersons = [];
-let initialPeople = [];
+let total_clicks = 0;
+let correct_clicks = 0;
+
 const MAX_PERSONS_DISPLAY = 4;
 
 $.ajax({
@@ -8,11 +11,9 @@ $.ajax({
     dataType: 'json',
     success: function(people) {
     	 allPersons = people;
-
        let vm = new ViewModel();
        vm.updateQuizPeople();
        ko.applyBindings(vm);
-       //$( "#quiz-name" ).text(allPeople[0].firstName + " " + allPeople[0].lastName);
     },
     fail: function(data) {
     	alert( "error" );
@@ -33,6 +34,7 @@ let Person = function(data) {
 	this.lastName = ko.observable(data.lastName);
 	this.jobTitle = data.jobTitle;
 	this.imgSrc = ko.observable(data.headshot.url);
+  this.cssClass = ko.observable("");
 
   this.fullName = ko.pureComputed(function() {
     return this.firstName() + " " + this.lastName();
@@ -52,7 +54,7 @@ let ViewModel = function() {
     while (randomValues.size < MAX_PERSONS_DISPLAY) {
       let random = getRandomInt(allPersons.length);
       // do not show people with no picture
-      if (allPersons[random].headshot.url !== 'undefined') {
+      if (allPersons[random].headshot.url) {
         randomValues.add(random);
       }
     }
@@ -63,9 +65,14 @@ let ViewModel = function() {
     self.currentPerson(self.quizPeople()[random]);
   };
 
-  this.checkAnswer = function(clickedPerson) {
+  self.checkAnswer = function(clickedPerson) {
+    total_clicks++;
     if (clickedPerson.id === self.currentPerson().id) {
-      alert("match found");
+      correct_clicks++;
+      clickedPerson.cssClass("overlay-green");
+    }
+    else {
+      clickedPerson.cssClass("overlay-red");
     }
   };
 };
