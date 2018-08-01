@@ -22,6 +22,8 @@
                 </ul>
             </div>
               <h2 class="center" data-bind="with: currentPerson">Who is <span id="quiz-name" data-bind="text: fullName"></span>?</h2>
+              <p class="stats">Total Clicks: <span data-bind="text: total_clicks"></span></p>
+              <p class="stats">Total Correct Clicks: <span data-bind="text: correct_clicks"></span></p>
               <div id="photo-row" class="container-fluid">
                     <!-- Control the column width, and how they should appear on different devices -->
                     <div class="row" data-bind="foreach: quizPeople">

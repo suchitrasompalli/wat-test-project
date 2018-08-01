@@ -2,10 +2,16 @@ body {
 	background-color: 	#F8F8F8;
 }
 #index-page {
-	margin-top: 5em;
+	margin-top: 2em;
 }
 .center {
 	text-align: center;
+}
+.stats {
+	font-size:1em;
+	text-align: center;
+	font-weight: bold;
+	font-style: oblique;
 }
 #photo-row {
 	margin-top: 2em;
@@ -48,7 +54,7 @@ img {
 }
 h2 {
 	font-size:2em;
-	line-height: 4em;
+	line-height: 2em;
 }
 @media only screen and (max-width: 800px) {
     img {
@@ -61,5 +67,4 @@ h2 {
 			font-size:1em;
 			line-height: 2em;
 		}
-
 }

@@ -1,7 +1,5 @@
 // globals
 let allPersons = [];
-let total_clicks = 0;
-let correct_clicks = 0;
 
 const MAX_PERSONS_DISPLAY = 5;
 
@@ -29,18 +27,19 @@ function getRandomInt(max) {
 let Person = function(data) {
 
 	var self = this;
-  this.id = data.id;
-	this.firstName = ko.observable(data.firstName);
-	this.lastName = ko.observable(data.lastName);
-	this.jobTitle = data.jobTitle;
-	this.imgSrc = ko.observable(data.headshot.url);
-  this.cssClass = ko.observable("");
+  self.id = data.id;
+	self.firstName = ko.observable(data.firstName);
+	self.lastName = ko.observable(data.lastName);
+	self.jobTitle = data.jobTitle;
+	self.imgSrc = ko.observable(data.headshot.url);
+  self.cssClass = ko.observable("");
 
-  this.fullName = ko.pureComputed(function() {
+  self.fullName = ko.pureComputed(function() {
     return this.firstName() + " " + this.lastName();
   }, this);
 
 };
+
 // ViewModel
 let ViewModel = function() {
   let self = this;
@@ -48,6 +47,8 @@ let ViewModel = function() {
   self.menu = ko.observableArray(["Play", "Team Play", "Mike Search", "M*"]);
   self.quizPeople = ko.observableArray([]);
   self.currentPerson = ko.observable();
+  self.total_clicks = ko.observable(0);
+  self.correct_clicks = ko.observable(0);
 
   self.updateQuizPeople = function() {
     randomValues.clear();
@@ -68,9 +69,9 @@ let ViewModel = function() {
   };
 
   self.checkAnswer = function(clickedPerson) {
-    total_clicks++;
+    self.total_clicks(self.total_clicks()+1);
     if (clickedPerson.id === self.currentPerson().id) {
-      correct_clicks++;
+      self.correct_clicks(self.correct_clicks()+1);
       clickedPerson.cssClass("overlay-green");
     }
     else {
