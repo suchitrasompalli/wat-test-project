@@ -36,11 +36,15 @@ img {
 }
 
 .overlay-red {
-    filter:drop-shadow(8px 8px 10px red);
+		background-color: red;
+    opacity: 0.6;
+    filter: alpha(opacity=60); /* For IE8 and earlier */
 }
 
 .overlay-green {
-   filter:drop-shadow(8px 8px 10px green);
+	background-color: green;
+	opacity: 0.6;
+	filter: alpha(opacity=60); /* For IE8 and earlier */
 }
 h2 {
 	font-size:2em;
