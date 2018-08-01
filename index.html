@@ -16,6 +16,11 @@
     </head>
     <body>
         <div id="index-page" class="container-fluid">
+            <div>
+                <ul data-bind="foreach: menu">
+                  <li><button data-bind="text: $data, click: $parent.updateQuizPeople"></button></li>
+                </ul>
+            </div>
               <h2 class="center" data-bind="with: currentPerson">Who is <span id="quiz-name" data-bind="text: fullName"></span>?</h2>
               <div id="photo-row" class="container-fluid">
                     <!-- Control the column width, and how they should appear on different devices -->

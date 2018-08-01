@@ -45,6 +45,7 @@ let Person = function(data) {
 let ViewModel = function() {
   let self = this;
   const randomValues = new Set();
+  self.menu = ko.observableArray(["Play", "Team Play", "Mike Search", "M*"]);
   self.quizPeople = ko.observableArray([]);
   self.currentPerson = ko.observable();
 
@@ -58,6 +59,7 @@ let ViewModel = function() {
         randomValues.add(random);
       }
     }
+    self.quizPeople([]);
     for (let item of randomValues) {
       self.quizPeople.push(new Person(allPersons[item]));
     }
