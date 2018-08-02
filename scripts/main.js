@@ -1,6 +1,6 @@
 // globals
 let allPersons = [];
-let firstNameMikePersons = [];
+let firstNameMatPersons = [];
 
 const MAX_PERSONS_DISPLAY = 5;
 
@@ -10,6 +10,7 @@ $.ajax({
     dataType: 'json',
     success: function(people) {
     	 allPersons = people;
+       getMatPersons();
        let vm = new ViewModel();
        vm.defaultUpdate();
        ko.applyBindings(vm);
@@ -24,12 +25,14 @@ function getRandomInt(max) {
   return Math.floor(Math.random() * Math.floor(max));
 }
 
-allPersons.forEach(function(person) {
-    if (person.firstName === "Mike") {
-      firstNameMikePersons.push(person);
-    }
-	});
-
+function getMatPersons() {
+  allPersons.forEach(function(person) {
+      var patt = new RegExp("Mat");
+      if (patt.test(person.firstName)) {
+        firstNameMatPersons.push(person);
+      }
+  });
+}
 
 // Model
 let Person = function(data) {
@@ -94,22 +97,22 @@ let ViewModel = function() {
     self.currentPerson(self.quizPeople()[random]);
   };
 
-  self.mikeUpdate = function() {
+  self.matUpdate = function() {
     randomValues.clear();
-    // get 4 unique random indices
+    // get unique random indices
     while (randomValues.size < MAX_PERSONS_DISPLAY) {
-      let random = getRandomInt(firstNameMikePersons.length);
+      let randomNumber = getRandomInt(firstNameMatPersons.length);
       // do not show people with no picture
-      if ((firstNameMikePersons[random].headshot.url)) {
-        randomValues.add(random);
+      if ((firstNameMatPersons[randomNumber].headshot.url)) {
+        randomValues.add(randomNumber);
       }
     }
     self.quizPeople([]);
     for (let item of randomValues) {
-      self.quizPeople.push(new Person(firstNameMikePersons[item]));
+      self.quizPeople.push(new Person(firstNameMatPersons[item]));
     }
-    let random = getRandomInt(MAX_PERSONS_DISPLAY);
-    self.currentPerson(self.quizPeople()[random]);
+    let randomNumber = getRandomInt(MAX_PERSONS_DISPLAY);
+    self.currentPerson(self.quizPeople()[randomNumber]);
   };
 
   self.checkAnswer = function(clickedPerson) {

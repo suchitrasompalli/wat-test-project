@@ -19,8 +19,7 @@
           <ul>
             <li><a data-bind="click: defaultUpdate">Play</a></li>
             <li><a data-bind="click: teamUpdate">Team Play</a></li>
-            <li><a data-bind="click: mikeUpdate">Mike Search</a></li>
-
+            <li><a data-bind="click: matUpdate">Mat*</a></li>
           </ul>
       </div>
         <div id="index-page" class="container-fluid">
@@ -30,7 +29,7 @@
               <div id="photo-row" class="container-fluid">
                     <!-- Control the column width, and how they should appear on different devices -->
                     <div class="row" data-bind="foreach: quizPeople">
-                      <div class="column col-sm-3" data-bind="css: $data.cssClass"><img data-bind="attr:{src: $data.imgSrc}, click: $parent.checkAnswer"></div>
+                      <div class="column col-sm-3"><img data-bind="attr:{src: $data.imgSrc}, click: $parent.checkAnswer, css: $data.cssClass"/></div>
                     </div>
               </div>
         </div>
