@@ -15,12 +15,15 @@
         <script src="scripts/vendor/modernizr.min.js"></script>
     </head>
     <body>
+      <div class="nav">
+          <ul>
+            <li><a data-bind="click: defaultUpdate">Play</a></li>
+            <li><a data-bind="click: teamUpdate">Team Play</a></li>
+            <li><a data-bind="click: mikeUpdate">Mike Search</a></li>
+
+          </ul>
+      </div>
         <div id="index-page" class="container-fluid">
-            <div>
-                <ul data-bind="foreach: menu">
-                  <li><button data-bind="text: $data, click: $parent.updateQuizPeople"></button></li>
-                </ul>
-            </div>
               <h2 class="center" data-bind="with: currentPerson">Who is <span id="quiz-name" data-bind="text: fullName"></span>?</h2>
               <p class="stats">Total Clicks: <span data-bind="text: total_clicks"></span></p>
               <p class="stats">Total Correct Clicks: <span data-bind="text: correct_clicks"></span></p>

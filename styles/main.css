@@ -4,6 +4,19 @@ body {
 #index-page {
 	margin-top: 2em;
 }
+ul {
+    list-style-type: none;
+    margin: 10px;
+    padding: 10px;
+}
+
+li {
+    display: inline;
+		margin-right: 20px;
+}
+.nav {
+	margin-top: 1em;
+}
 .center {
 	text-align: center;
 }

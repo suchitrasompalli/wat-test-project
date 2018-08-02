@@ -1,5 +1,6 @@
 // globals
 let allPersons = [];
+let firstNameMikePersons = [];
 
 const MAX_PERSONS_DISPLAY = 5;
 
@@ -10,7 +11,7 @@ $.ajax({
     success: function(people) {
     	 allPersons = people;
        let vm = new ViewModel();
-       vm.updateQuizPeople();
+       vm.defaultUpdate();
        ko.applyBindings(vm);
     },
     fail: function(data) {
@@ -22,6 +23,13 @@ $.ajax({
 function getRandomInt(max) {
   return Math.floor(Math.random() * Math.floor(max));
 }
+
+allPersons.forEach(function(person) {
+    if (person.firstName === "Mike") {
+      firstNameMikePersons.push(person);
+    }
+	});
+
 
 // Model
 let Person = function(data) {
@@ -50,7 +58,7 @@ let ViewModel = function() {
   self.total_clicks = ko.observable(0);
   self.correct_clicks = ko.observable(0);
 
-  self.updateQuizPeople = function() {
+  self.defaultUpdate = function() {
     randomValues.clear();
     // get 4 unique random indices
     while (randomValues.size < MAX_PERSONS_DISPLAY) {
@@ -63,6 +71,42 @@ let ViewModel = function() {
     self.quizPeople([]);
     for (let item of randomValues) {
       self.quizPeople.push(new Person(allPersons[item]));
+    }
+    let random = getRandomInt(MAX_PERSONS_DISPLAY);
+    self.currentPerson(self.quizPeople()[random]);
+  };
+
+  self.teamUpdate = function() {
+    randomValues.clear();
+    // get 4 unique random indices
+    while (randomValues.size < MAX_PERSONS_DISPLAY) {
+      let random = getRandomInt(allPersons.length);
+      // do not show people with no picture
+      if ((allPersons[random].headshot.url) && (allPersons[random].jobTitle)) {
+        randomValues.add(random);
+      }
+    }
+    self.quizPeople([]);
+    for (let item of randomValues) {
+      self.quizPeople.push(new Person(allPersons[item]));
+    }
+    let random = getRandomInt(MAX_PERSONS_DISPLAY);
+    self.currentPerson(self.quizPeople()[random]);
+  };
+
+  self.mikeUpdate = function() {
+    randomValues.clear();
+    // get 4 unique random indices
+    while (randomValues.size < MAX_PERSONS_DISPLAY) {
+      let random = getRandomInt(firstNameMikePersons.length);
+      // do not show people with no picture
+      if ((firstNameMikePersons[random].headshot.url)) {
+        randomValues.add(random);
+      }
+    }
+    self.quizPeople([]);
+    for (let item of randomValues) {
+      self.quizPeople.push(new Person(firstNameMikePersons[item]));
     }
     let random = getRandomInt(MAX_PERSONS_DISPLAY);
     self.currentPerson(self.quizPeople()[random]);
