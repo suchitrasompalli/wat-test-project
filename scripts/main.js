@@ -44,6 +44,7 @@ let Person = function(data) {
 	self.jobTitle = data.jobTitle;
 	self.imgSrc = ko.observable(data.headshot.url);
   self.cssClass = ko.observable("");
+  self.spanClass = ko.observable("hidden");
 
   self.fullName = ko.pureComputed(function() {
     return this.firstName() + " " + this.lastName();
@@ -117,6 +118,7 @@ let ViewModel = function() {
 
   self.checkAnswer = function(clickedPerson) {
     self.total_clicks(self.total_clicks()+1);
+    clickedPerson.spanClass("show");
     if (clickedPerson.id === self.currentPerson().id) {
       self.correct_clicks(self.correct_clicks()+1);
       clickedPerson.cssClass("overlay-green");

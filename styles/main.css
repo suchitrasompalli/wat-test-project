@@ -55,8 +55,6 @@ img {
 }
 
 .overlay-red {
-	height: 100%;
-	width: 100%;
 	background-color: red;
 	opacity: 0.6;
 	filter: alpha(opacity=60); /* For IE8 and earlier */
@@ -67,10 +65,19 @@ img {
 	opacity: 0.6;
 	filter: alpha(opacity=60); /* For IE8 and earlier */
 }
-
+.hidden {
+	display: none;
+}
+.show {
+	display: block;
+}
 h2 {
 	font-size:2em;
 	line-height: 2em;
+}
+h4 {
+	color: #0088cc;
+	text-align: center;
 }
 @media only screen and (max-width: 800px) {
     img {
