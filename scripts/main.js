@@ -49,7 +49,7 @@ let Person = function(data) {
 	self.firstName = ko.observable(data.firstName);
 	self.lastName = ko.observable(data.lastName);
 	self.jobTitle = data.jobTitle;
-	self.imgSrc = ko.observable("http:"+data.headshot.url);
+	self.imgSrc = ko.observable("https:"+data.headshot.url);
   self.cssClass = ko.observable("");
   self.spanClass = ko.observable("hidden");
 
