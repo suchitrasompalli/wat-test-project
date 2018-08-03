@@ -7,7 +7,7 @@ const MAX_PERSONS_DISPLAY = 5;
 
 $.ajax({
     url: 'https://willowtreeapps.com/api/v1.0/profiles/',
-    ifModified: true,
+    cache: true,
     dataType: 'json',
     success: function(people) {
     	 allPersons = people;
@@ -49,7 +49,7 @@ let Person = function(data) {
 	self.firstName = ko.observable(data.firstName);
 	self.lastName = ko.observable(data.lastName);
 	self.jobTitle = data.jobTitle;
-	self.imgSrc = ko.observable(data.headshot.url);
+	self.imgSrc = ko.observable("http:"+data.headshot.url);
   self.cssClass = ko.observable("");
   self.spanClass = ko.observable("hidden");
 
