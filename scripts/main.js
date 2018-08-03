@@ -2,6 +2,7 @@
 let allPersons = [];
 let firstNameMatPersons = [];
 
+// The number of persons to display on screen.
 const MAX_PERSONS_DISPLAY = 5;
 
 $.ajax({
@@ -16,15 +17,19 @@ $.ajax({
        ko.applyBindings(vm);
     },
     fail: function(data) {
-    	alert( "error" );
-  	}
+      console.log(data);
+  	},
+    error: function(data) {
+      console.log(data);
+    }
 });
 
-// Generates a random number between 0 and max -1
+// Return a random number between 0 and max -1
 function getRandomInt(max) {
   return Math.floor(Math.random() * Math.floor(max));
 }
 
+/** Looks for persons whose firstname contains Mat and adds to firstNameMatPersons */
 function getMatPersons() {
   allPersons.forEach(function(person) {
       var patt = new RegExp("Mat");
@@ -34,7 +39,9 @@ function getMatPersons() {
   });
 }
 
-// Model
+/****** Model****************************************/
+
+// Represent a person or employee
 let Person = function(data) {
 
 	var self = this;
@@ -52,7 +59,7 @@ let Person = function(data) {
 
 };
 
-// ViewModel
+/******************** ViewModel  ******************************************/
 let ViewModel = function() {
   let self = this;
   const randomValues = new Set();
@@ -62,6 +69,7 @@ let ViewModel = function() {
   self.total_clicks = ko.observable(0);
   self.correct_clicks = ko.observable(0);
 
+  // Selects persons to play the game of matching employee's with a name
   self.defaultUpdate = function() {
     randomValues.clear();
     // get 4 unique random indices
@@ -80,6 +88,7 @@ let ViewModel = function() {
     self.currentPerson(self.quizPeople()[random]);
   };
 
+  // select only the persons who are employeed here. By checking the job title.
   self.teamUpdate = function() {
     randomValues.clear();
     // get 4 unique random indices
@@ -98,6 +107,7 @@ let ViewModel = function() {
     self.currentPerson(self.quizPeople()[random]);
   };
 
+  // select random number of persons whose first names has Mat in it.
   self.matUpdate = function() {
     randomValues.clear();
     // get unique random indices
@@ -116,6 +126,7 @@ let ViewModel = function() {
     self.currentPerson(self.quizPeople()[randomNumber]);
   };
 
+/* Check if person id matches, when a person image is clicked. */
   self.checkAnswer = function(clickedPerson) {
     self.total_clicks(self.total_clicks()+1);
     clickedPerson.spanClass("show");
